@@ -1,5 +1,4 @@
 /Users/randulamawaththa/Work Related Stuff/Github/SLIIT/EAD-Backend/bin/Debug/net8.0/appsettings.Development.json
-/Users/randulamawaththa/Work Related Stuff/Github/SLIIT/EAD-Backend/bin/Debug/net8.0/appsettings.json
 /Users/randulamawaththa/Work Related Stuff/Github/SLIIT/EAD-Backend/bin/Debug/net8.0/EADBackend.staticwebassets.runtime.json
 /Users/randulamawaththa/Work Related Stuff/Github/SLIIT/EAD-Backend/bin/Debug/net8.0/EADBackend
 /Users/randulamawaththa/Work Related Stuff/Github/SLIIT/EAD-Backend/bin/Debug/net8.0/EADBackend.deps.json
@@ -54,3 +53,7 @@
 /Users/randulamawaththa/Work Related Stuff/Github/SLIIT/EAD-Backend/obj/Debug/net8.0/EADBackend.pdb
 /Users/randulamawaththa/Work Related Stuff/Github/SLIIT/EAD-Backend/obj/Debug/net8.0/EADBackend.genruntimeconfig.cache
 /Users/randulamawaththa/Work Related Stuff/Github/SLIIT/EAD-Backend/obj/Debug/net8.0/ref/EADBackend.dll
+/Users/randulamawaththa/Work Related Stuff/Github/SLIIT/EAD-Backend/bin/Debug/net8.0/BCrypt.Net-Next.dll
+/Users/randulamawaththa/Work Related Stuff/Github/SLIIT/EAD-Backend/bin/Debug/net8.0/dotenv.net.dll
+/Users/randulamawaththa/Work Related Stuff/Github/SLIIT/EAD-Backend/bin/Debug/net8.0/appsettings.json
+/Users/randulamawaththa/Work Related Stuff/Github/SLIIT/EAD-Backend/bin/Debug/net8.0/Newtonsoft.Json.dll
