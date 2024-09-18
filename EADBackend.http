@@ -1,0 +1,6 @@
+@EADBackend_HostAddress = http://localhost:5172
+
+GET {{EADBackend_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
