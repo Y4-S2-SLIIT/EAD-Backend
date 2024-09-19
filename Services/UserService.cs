@@ -1,12 +1,7 @@
 using MongoDB.Driver;
 using EADBackend.Models;
 using EADBackend.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using BCrypt.Net;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
 
 namespace EADBackend.Services
 {

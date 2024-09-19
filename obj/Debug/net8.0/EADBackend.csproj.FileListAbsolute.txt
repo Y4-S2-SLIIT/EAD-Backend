@@ -1,4 +1,5 @@
 /Users/randulamawaththa/Work Related Stuff/Github/SLIIT/EAD-Backend/bin/Debug/net8.0/appsettings.Development.json
+/Users/randulamawaththa/Work Related Stuff/Github/SLIIT/EAD-Backend/bin/Debug/net8.0/appsettings.json
 /Users/randulamawaththa/Work Related Stuff/Github/SLIIT/EAD-Backend/bin/Debug/net8.0/EADBackend.staticwebassets.runtime.json
 /Users/randulamawaththa/Work Related Stuff/Github/SLIIT/EAD-Backend/bin/Debug/net8.0/EADBackend
 /Users/randulamawaththa/Work Related Stuff/Github/SLIIT/EAD-Backend/bin/Debug/net8.0/EADBackend.deps.json
@@ -7,7 +8,9 @@
 /Users/randulamawaththa/Work Related Stuff/Github/SLIIT/EAD-Backend/bin/Debug/net8.0/EADBackend.pdb
 /Users/randulamawaththa/Work Related Stuff/Github/SLIIT/EAD-Backend/bin/Debug/net8.0/AWSSDK.Core.dll
 /Users/randulamawaththa/Work Related Stuff/Github/SLIIT/EAD-Backend/bin/Debug/net8.0/AWSSDK.SecurityToken.dll
+/Users/randulamawaththa/Work Related Stuff/Github/SLIIT/EAD-Backend/bin/Debug/net8.0/BCrypt.Net-Next.dll
 /Users/randulamawaththa/Work Related Stuff/Github/SLIIT/EAD-Backend/bin/Debug/net8.0/DnsClient.dll
+/Users/randulamawaththa/Work Related Stuff/Github/SLIIT/EAD-Backend/bin/Debug/net8.0/dotenv.net.dll
 /Users/randulamawaththa/Work Related Stuff/Github/SLIIT/EAD-Backend/bin/Debug/net8.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
 /Users/randulamawaththa/Work Related Stuff/Github/SLIIT/EAD-Backend/bin/Debug/net8.0/Microsoft.AspNetCore.OpenApi.dll
 /Users/randulamawaththa/Work Related Stuff/Github/SLIIT/EAD-Backend/bin/Debug/net8.0/Microsoft.IdentityModel.Abstractions.dll
@@ -21,6 +24,7 @@
 /Users/randulamawaththa/Work Related Stuff/Github/SLIIT/EAD-Backend/bin/Debug/net8.0/MongoDB.Driver.dll
 /Users/randulamawaththa/Work Related Stuff/Github/SLIIT/EAD-Backend/bin/Debug/net8.0/MongoDB.Driver.Core.dll
 /Users/randulamawaththa/Work Related Stuff/Github/SLIIT/EAD-Backend/bin/Debug/net8.0/MongoDB.Libmongocrypt.dll
+/Users/randulamawaththa/Work Related Stuff/Github/SLIIT/EAD-Backend/bin/Debug/net8.0/Newtonsoft.Json.dll
 /Users/randulamawaththa/Work Related Stuff/Github/SLIIT/EAD-Backend/bin/Debug/net8.0/SharpCompress.dll
 /Users/randulamawaththa/Work Related Stuff/Github/SLIIT/EAD-Backend/bin/Debug/net8.0/Snappier.dll
 /Users/randulamawaththa/Work Related Stuff/Github/SLIIT/EAD-Backend/bin/Debug/net8.0/Swashbuckle.AspNetCore.Swagger.dll
@@ -53,7 +57,3 @@
 /Users/randulamawaththa/Work Related Stuff/Github/SLIIT/EAD-Backend/obj/Debug/net8.0/EADBackend.pdb
 /Users/randulamawaththa/Work Related Stuff/Github/SLIIT/EAD-Backend/obj/Debug/net8.0/EADBackend.genruntimeconfig.cache
 /Users/randulamawaththa/Work Related Stuff/Github/SLIIT/EAD-Backend/obj/Debug/net8.0/ref/EADBackend.dll
-/Users/randulamawaththa/Work Related Stuff/Github/SLIIT/EAD-Backend/bin/Debug/net8.0/BCrypt.Net-Next.dll
-/Users/randulamawaththa/Work Related Stuff/Github/SLIIT/EAD-Backend/bin/Debug/net8.0/dotenv.net.dll
-/Users/randulamawaththa/Work Related Stuff/Github/SLIIT/EAD-Backend/bin/Debug/net8.0/appsettings.json
-/Users/randulamawaththa/Work Related Stuff/Github/SLIIT/EAD-Backend/bin/Debug/net8.0/Newtonsoft.Json.dll

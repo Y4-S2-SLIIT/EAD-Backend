@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EADBackend")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b56ef0b9f24c3261e1f5b9685800366fde7be442")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1b5265d415b1e1b025690658112abb83cba6c10d")]
 [assembly: System.Reflection.AssemblyProductAttribute("EADBackend")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EADBackend")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
