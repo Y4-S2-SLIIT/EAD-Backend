@@ -1,5 +1,4 @@
 using EADBackend.Models;
-using System.Collections.Generic;
 
 namespace EADBackend.Services.Interfaces;
 public interface IUserService
