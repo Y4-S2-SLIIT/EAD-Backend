@@ -43,6 +43,13 @@ namespace EADBackend.Services
             return _orderCollection.Find(o => o.CustomerId == customerId).ToList();
         }
 
+        public IEnumerable<OrderModel> GetOrdersByVendorId(string vendorId)
+        {
+            var filter = Builders<OrderModel>.Filter.ElemMatch(o => o.Items,
+        Builders<VendorOrderItems>.Filter.Eq(v => v.VenderId, vendorId));
+            return _orderCollection.Find(filter).ToList();
+        }
+
         public void UpdateOrder(string id, OrderModel orderModel)
         {
             var filter = Builders<OrderModel>.Filter.Eq(o => o.Id, id);

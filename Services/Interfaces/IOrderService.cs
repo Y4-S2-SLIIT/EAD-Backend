@@ -9,4 +9,5 @@ public interface IOrderService
     IEnumerable<OrderModel> GetAllOrders();
     void UpdateOrder(string id, OrderModel orderModel);
     void DeleteOrder(string id);
+    IEnumerable<OrderModel> GetOrdersByVendorId(string vendorId);
 }
