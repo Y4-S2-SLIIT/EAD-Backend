@@ -16,5 +16,6 @@ namespace EADBackend.Models
         public required string Address { get; set; }
         public required string Username { get; set; }
         public required string Password { get; set; }
+        public bool IsVerified { get; set; } = false;
     }
 }

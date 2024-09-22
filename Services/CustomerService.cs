@@ -175,5 +175,24 @@ namespace EADBackend.Services
         {
             return _customers.Find(c => c.Username == username).FirstOrDefault() != null;
         }
+
+        public void VerifyCustomer(string id)
+        {
+            var update = Builders<CustomerModel>.Update.Set(c => c.IsVerified, true);
+            var result = _customers.UpdateOne(c => c.Id == id, update);
+
+            if (result.MatchedCount == 0)
+            {
+                throw new InvalidOperationException("Customer not found.");
+            }
+
+            if (result.ModifiedCount == 0)
+            {
+                Console.WriteLine("No fields were updated.");
+                return;
+            }
+
+            Console.WriteLine("Customer verified successfully.");
+        }
     }
 }

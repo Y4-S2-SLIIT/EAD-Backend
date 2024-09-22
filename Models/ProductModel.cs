@@ -14,7 +14,7 @@ namespace EADBackend.Models
         public required string Brand { get; set; }
         public required string Description { get; set; }
         public required string Category { get; set; }
-        public required string Price { get; set; }
+        public required float Price { get; set; }
         public required string Image { get; set; }
         public required string Stock { get; set; }
         public required string VendorId { get; set; }

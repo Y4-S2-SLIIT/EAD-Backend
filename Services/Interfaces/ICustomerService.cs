@@ -11,4 +11,5 @@ public interface ICustomerService
     IEnumerable<CustomerModel> GetAllCustomers();
     void UpdateCustomer(string id, CustomerModel customerModel);
     void DeleteCustomer(string id);
+    void VerifyCustomer(string id);
 }
