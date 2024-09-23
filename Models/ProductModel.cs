@@ -13,10 +13,10 @@ namespace EADBackend.Models
         public required string Name { get; set; }
         public required string Brand { get; set; }
         public required string Description { get; set; }
-        public required string Category { get; set; }
+        public required string CategoryId { get; set; }
         public required float Price { get; set; }
         public required string Image { get; set; }
-        public required string Stock { get; set; }
+        public required int Stock { get; set; }
         public required string VendorId { get; set; }
         public List<ReviewModel> Reviews { get; set; } = [];
         public float Rating { get; set; } = 0;

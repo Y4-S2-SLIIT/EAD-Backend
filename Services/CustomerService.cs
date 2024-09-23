@@ -116,6 +116,18 @@ namespace EADBackend.Services
                 updateDefinitions.Add(Builders<CustomerModel>.Update.Set(c => c.Address, customerModel.Address));
             }
 
+            // Update IsVerified
+            if (customerModel.IsVerified != existingCustomer.IsVerified)
+            {
+                updateDefinitions.Add(Builders<CustomerModel>.Update.Set(c => c.IsVerified, customerModel.IsVerified));
+            }
+
+            // Update IsDeactivated
+            if (customerModel.IsDeactivated != existingCustomer.IsDeactivated)
+            {
+                updateDefinitions.Add(Builders<CustomerModel>.Update.Set(c => c.IsDeactivated, customerModel.IsDeactivated));
+            }
+
             // If no fields are updated, skip the update operation
             if (updateDefinitions.Count == 0)
             {
