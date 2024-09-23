@@ -33,17 +33,6 @@ namespace EADBackend.Controllers
             return Ok(new { status = 200, added = new { Token = token } });
         }
 
-        // Secure Data
-        [HttpGet("secure-data")]
-        [ProducesResponseType(typeof(string), 200)]
-        [Authorize]
-        public IActionResult GetSecureData()
-        {
-            return Ok(new { status = "200", added = new { Data = "This is secure data only for authenticated users." } });
-        }
-
-        // CRUD Operations for UserModel
-
         // Create a new user
         [HttpPost("register")]
         [ProducesResponseType(typeof(string), 200)]
