@@ -1,7 +1,4 @@
-// Services/JwtService.cs
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -10,7 +7,7 @@ namespace EADBackend.Services
 {
     public interface IJwtService
     {
-        string GenerateToken(string username);
+        string GenerateToken(string userId);
     }
 
     public class JwtService(IConfiguration configuration) : IJwtService
@@ -25,17 +22,18 @@ namespace EADBackend.Services
                 ? expiration
                 : throw new ArgumentNullException(nameof(configuration), "JwtSettings:ExpirationInMinutes is not configured or invalid.");
 
-        public string GenerateToken(string username)
+        public string GenerateToken(string userId)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_secret);
 
+            // Create token with userId as NameIdentifier
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[]
                 {
-                new Claim(ClaimTypes.Name, username)
-            }),
+                    new Claim(ClaimTypes.NameIdentifier, userId) // UserId claim
+                }),
                 Expires = DateTime.UtcNow.AddMinutes(_expirationInMinutes),
                 Issuer = _issuer,
                 Audience = _audience,

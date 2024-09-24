@@ -33,17 +33,17 @@ namespace EADBackend.Services
             _users.Indexes.CreateOne(usernameIndexModel);
         }
 
-        public bool ValidateUser(string username, string password)
+        public string? ValidateUser(string username, string password)
         {
             var user = _users.Find(u => u.Username == username).FirstOrDefault();
 
             // Return false if user doesn't exist or password doesn't match
             if (user == null || !BCrypt.Net.BCrypt.Verify(password, user.Password))
             {
-                return false;
+                return null;
             }
 
-            return true;
+            return user.Id;
         }
 
         public void CreateUser(UserModel userModel)

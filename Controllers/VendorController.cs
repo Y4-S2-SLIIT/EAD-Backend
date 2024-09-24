@@ -24,13 +24,16 @@ namespace EADBackend.Controllers
         [ProducesResponseType(typeof(object), 200)]
         public IActionResult Login([FromBody] LoginModel loginModel)
         {
-            if (!_vendorService.ValidateVendor(loginModel.Username, loginModel.Password))
+            var vendorId = _vendorService.ValidateVendor(loginModel.Username, loginModel.Password);
+
+            // Check if validation failed (vendorId is null)
+            if (vendorId == null)
             {
                 return BadRequest(new { status = 400, error = "Invalid credentials." });
             }
+            var token = _jwtService.GenerateToken(vendorId);
 
-            var token = _jwtService.GenerateToken(loginModel.Username);
-            return Ok(new { status = 200, added = new { Token = token } });
+            return Ok(new { status = 200, Token = token });
         }
 
         // Create a new vendor

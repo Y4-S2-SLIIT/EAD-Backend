@@ -3,7 +3,7 @@ using EADBackend.Models;
 namespace EADBackend.Services.Interfaces;
 public interface IUserService
 {
-    bool ValidateUser(string username, string password);
+    string? ValidateUser(string username, string password);
     bool IsEmailTaken(string email);
     bool IsUsernameTaken(string username);
     void CreateUser(UserModel userModel);

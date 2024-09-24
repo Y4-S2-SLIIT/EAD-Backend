@@ -33,17 +33,17 @@ namespace EADBackend.Services
             _vendors.Indexes.CreateOne(usernameIndexModel);
         }
 
-        public bool ValidateVendor(string username, string password)
+        public string? ValidateVendor(string username, string password)
         {
             var vendor = _vendors.Find(v => v.Username == username).FirstOrDefault();
 
             // Return false if vendor doesn't exist or password doesn't match
             if (vendor == null || !BCrypt.Net.BCrypt.Verify(password, vendor.Password))
             {
-                return false;
+                return null;
             }
 
-            return true;
+            return vendor.Id;
         }
 
         public void CreateVendor(VendorModel vendorModel)
