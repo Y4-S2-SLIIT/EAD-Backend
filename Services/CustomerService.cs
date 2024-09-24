@@ -33,17 +33,18 @@ namespace EADBackend.Services
             _customers.Indexes.CreateOne(usernameIndexModel);
         }
 
-        public bool ValidateCustomer(string username, string password)
+        public string? ValidateCustomer(string username, string password)
         {
             var customer = _customers.Find(c => c.Username == username).FirstOrDefault();
 
-            // Return false if customer doesn't exist or password doesn't match
+            // Return null if customer doesn't exist or password doesn't match
             if (customer == null || !BCrypt.Net.BCrypt.Verify(password, customer.Password))
             {
-                return false;
+                return null;
             }
 
-            return true;
+            // Return the customer ID if validation is successful
+            return customer.Id;
         }
 
         public void CreateCustomer(CustomerModel customerModel)
@@ -66,11 +67,7 @@ namespace EADBackend.Services
         public void UpdateCustomer(string id, CustomerModel customerModel)
         {
             // Check if the customer exists
-            var existingCustomer = _customers.Find(c => c.Id == id).FirstOrDefault();
-            if (existingCustomer == null)
-            {
-                throw new InvalidOperationException("Customer not found.");
-            }
+            var existingCustomer = _customers.Find(c => c.Id == id).FirstOrDefault() ?? throw new InvalidOperationException("Customer not found.");
 
             // Create a list to hold update definitions
             var updateDefinitions = new List<UpdateDefinition<CustomerModel>>();

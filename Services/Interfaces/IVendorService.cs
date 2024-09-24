@@ -4,7 +4,7 @@ namespace EADBackend.Services.Interfaces;
 
 public interface IVendorService
 {
-    bool ValidateVendor(string username, string password);
+    string? ValidateVendor(string username, string password);
     bool IsEmailTaken(string email);
     bool IsUsernameTaken(string username);
     void CreateVendor(VendorModel vendorModel);
