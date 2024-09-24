@@ -16,6 +16,18 @@ DotEnv.Load();
 // Add configuration to the service collection
 builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
 
+// Enable CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+});
+
 // Configure MongoDB settings from environment variables
 builder.Services.Configure<MongoDbSettings>(options =>
 {
@@ -45,7 +57,6 @@ builder.Services.AddAuthentication(options =>
 
     var keyBytes = Encoding.UTF8.GetBytes(secretKey);
 
-    // Ensure key length is at least 256 bits (32 bytes)
     if (keyBytes.Length < 32)
     {
         throw new ArgumentException("JWT_SECRET must be at least 256 bits (32 bytes) long.");
@@ -76,8 +87,17 @@ builder.Services.AddControllers();
 // Register Services
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IJwtService, JwtService>();
+builder.Services.AddScoped<ICustomerService, CustomerService>();
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IVendorService, VendorService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ICartService, CartService>();
 
 var app = builder.Build();
+
+// Enable CORS for all requests
+app.UseCors("AllowAll");
 
 // Configure the HTTP request pipeline.
 app.UseAuthentication();

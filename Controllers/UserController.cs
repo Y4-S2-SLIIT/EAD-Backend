@@ -24,26 +24,17 @@ namespace EADBackend.Controllers
         [ProducesResponseType(typeof(object), 200)]
         public IActionResult Login([FromBody] LoginModel loginModel)
         {
-            if (!_userService.ValidateUser(loginModel.Username, loginModel.Password))
+            var userId = _userService.ValidateUser(loginModel.Username, loginModel.Password);
+
+            // Check if validation failed (userId is null)
+            if (userId == null)
             {
                 return BadRequest(new { status = 400, error = "Invalid credentials." });
             }
+            var token = _jwtService.GenerateToken(userId);
 
-            var token = _jwtService.GenerateToken(loginModel.Username);
-            return Ok(new { status = 200, added = new { Token = token } });
+            return Ok(new { status = 200, Token = token });
         }
-
-        // Secure Data
-        [HttpGet("secure-data")]
-        [ProducesResponseType(typeof(string), 200)]
-        [Authorize]
-        public IActionResult GetSecureData()
-        {
-            return Ok(new { status = "200", added = new { Data = "This is secure data only for authenticated users." } });
-        }
-
-        // CRUD Operations for UserModel
-
         // Create a new user
         [HttpPost("register")]
         [ProducesResponseType(typeof(string), 200)]
