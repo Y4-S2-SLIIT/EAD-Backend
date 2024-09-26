@@ -2,6 +2,7 @@ using EADBackend.Models;
 using EADBackend.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using System.Runtime.InteropServices;
 
 namespace EADBackend.Controllers
 {
@@ -76,9 +77,25 @@ namespace EADBackend.Controllers
         [ProducesResponseType(typeof(string), 200)]
         public IActionResult CreateProduct([FromBody] ProductModel productModel)
         {
-            _productService.CreateProduct(productModel);
-            return Ok("Product created successfully");
+            try
+            {
+                // Attempt to create the product
+                _productService.CreateProduct(productModel);
+                // If successful, return a success message in JSON format
+                return Ok(new { status = "success", message = "Product created successfully" });
+            }
+            catch (Exception ex)
+            {
+                // If there's an error, return a failure message with the exception details
+                return BadRequest(new
+                {
+                    status = "error",
+                    message = "Failed to create product",
+                    error = ex.Message  // Include the exception message
+                });
+            }
         }
+
 
         // Update product by ID
         [HttpPut("{id}")]
@@ -91,7 +108,7 @@ namespace EADBackend.Controllers
                 return NotFound(notFoundMessage);
 
             _productService.UpdateProduct(id, productModel);
-            return Ok("Product updated successfully");
+            return Ok(new { status = 200, message = "Product updated successfully" });
         }
 
         // Delete a product by ID
@@ -105,7 +122,7 @@ namespace EADBackend.Controllers
                 return NotFound(notFoundMessage);
 
             _productService.DeleteProduct(id);
-            return Ok("Product deleted successfully");
+            return Ok(new{ status = 200, message = "Product deleted successfully" });
         }
 
         // Add a review to a product
