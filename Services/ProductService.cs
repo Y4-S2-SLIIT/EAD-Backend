@@ -44,7 +44,7 @@ namespace EADBackend.Services
 
         public IEnumerable<ProductModel> GetProductsByCategory(string categoryId)
         {
-            return _productCollection.Find(p => p.CategoryId == categoryId).ToList();
+            return _productCollection.Find(p => p.Category.Id == categoryId).ToList();
         }
 
         public IEnumerable<ProductModel> GetProductsByVendor(string vendorId)
