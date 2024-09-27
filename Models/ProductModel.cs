@@ -1,6 +1,7 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System.Collections.Generic;
+using EADBackend.Models;
 
 namespace EADBackend.Models
 {
@@ -12,8 +13,8 @@ namespace EADBackend.Models
 
         public required string Name { get; set; }
         public required string Brand { get; set; }
-        public required string Description { get; set; }
-        public required string CategoryId { get; set; }
+        public string? Description { get; set; }
+        public required CategoryModel Category { get; set; }
         public required float Price { get; set; }
         public required string Image { get; set; }
         public required int Stock { get; set; }
