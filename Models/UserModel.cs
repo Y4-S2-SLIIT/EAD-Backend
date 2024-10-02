@@ -15,6 +15,6 @@ namespace EADBackend.Models
         public required string Phone { get; set; }
         public required string UserType { get; set; }
         public required string Username { get; set; }
-        public required string Password { get; set; }
+        public string Password { get; set; } = "";
     }
 }

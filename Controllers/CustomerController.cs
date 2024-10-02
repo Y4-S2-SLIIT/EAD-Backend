@@ -130,5 +130,58 @@ namespace EADBackend.Controllers
                 return BadRequest(new { status = 400, error = ex.Message });
             }
         }
+
+        // Verify a customer
+        [HttpPut("verify/{id}")]
+        [ProducesResponseType(typeof(string), 200)]
+        [Authorize]
+        public IActionResult VerifyCustomer(string id)
+        {
+            var customer = _customerService.GetCustomerById(id);
+            if (customer == null)
+            {
+                return NotFound(new { status = 404, error = "Customer not found." });
+            }
+
+
+            customer.IsVerified = true;
+            _customerService.UpdateCustomer(id, customer);
+            return Ok(new { status = 200, added = new { Message = "Customer verified successfully." } });
+        }
+
+        // Deactivate a customer
+        [HttpPut("deactivate/{id}")]
+        [ProducesResponseType(typeof(string), 200)]
+        [Authorize]
+        public IActionResult DeactivateCustomer(string id)
+        {
+            var customer = _customerService.GetCustomerById(id);
+            if (customer == null)
+            {
+                return NotFound(new { status = 404, error = "Customer not found." });
+            }
+
+            customer.IsDeactivated = true;
+            _customerService.UpdateCustomer(id, customer);
+            return Ok(new { status = 200, added = new { Message = "Customer deactivated successfully." } });
+        }
+
+        // Activate a customer
+        [HttpPut("activate/{id}")]
+        [ProducesResponseType(typeof(string), 200)]
+        [Authorize]
+        public IActionResult ActivateCustomer(string id)
+        {
+            var customer = _customerService.GetCustomerById(id);
+            if (customer == null)
+            {
+                return NotFound(new { status = 404, error = "Customer not found." });
+            }
+
+            customer.IsDeactivated = false;
+            _customerService.UpdateCustomer(id, customer);
+            return Ok(new { status = 200, added = new { Message = "Customer activated successfully." } });
+        }
     }
+
 }
