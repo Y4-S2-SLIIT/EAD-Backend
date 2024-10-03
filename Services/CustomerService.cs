@@ -203,5 +203,99 @@ namespace EADBackend.Services
 
             Console.WriteLine("Customer verified successfully.");
         }
+
+        public void UpdateCustomerWithoutChangingPassword(CustomerModel customerModel)
+        {
+            // Check if the customer exists
+            var existingCustomer = _customers.Find(c => c.Id == customerModel.Id).FirstOrDefault()
+                                   ?? throw new InvalidOperationException("Customer not found.");
+
+            // Create a list to hold update definitions (only updating fields other than password)
+            var updateDefinitions = GetUpdateDefinitions(customerModel, existingCustomer);
+
+            // If no fields are updated, skip the update operation
+            if (updateDefinitions.Count == 0)
+            {
+                Console.WriteLine("No fields to update.");
+                return;
+            }
+
+            // Combine all update definitions into a single update operation
+            var update = Builders<CustomerModel>.Update.Combine(updateDefinitions);
+
+            try
+            {
+                // Perform the update
+                var result = _customers.UpdateOne(c => c.Id == customerModel.Id, update);
+
+                // Check if the update operation matched any documents
+                if (result.MatchedCount == 0)
+                {
+                    throw new InvalidOperationException("Update failed. Customer not found.");
+                }
+
+                if (result.ModifiedCount == 0)
+                {
+                    Console.WriteLine("No fields were updated.");
+                }
+                else
+                {
+                    Console.WriteLine("Customer updated successfully without changing the password.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error updating customer: {ex.Message}");
+                throw;
+            }
+        }
+
+        private static List<UpdateDefinition<CustomerModel>> GetUpdateDefinitions(CustomerModel customerModel, CustomerModel existingCustomer)
+        {
+            var updateDefinitions = new List<UpdateDefinition<CustomerModel>>();
+
+            // Update fields only if they are different from existing values
+            if (!string.IsNullOrEmpty(customerModel.Email) && customerModel.Email != existingCustomer.Email)
+            {
+                updateDefinitions.Add(Builders<CustomerModel>.Update.Set(c => c.Email, customerModel.Email));
+            }
+
+            if (!string.IsNullOrEmpty(customerModel.Username) && customerModel.Username != existingCustomer.Username)
+            {
+                updateDefinitions.Add(Builders<CustomerModel>.Update.Set(c => c.Username, customerModel.Username));
+            }
+
+            if (!string.IsNullOrEmpty(customerModel.FirstName) && customerModel.FirstName != existingCustomer.FirstName)
+            {
+                updateDefinitions.Add(Builders<CustomerModel>.Update.Set(c => c.FirstName, customerModel.FirstName));
+            }
+
+            if (!string.IsNullOrEmpty(customerModel.LastName) && customerModel.LastName != existingCustomer.LastName)
+            {
+                updateDefinitions.Add(Builders<CustomerModel>.Update.Set(c => c.LastName, customerModel.LastName));
+            }
+
+            if (!string.IsNullOrEmpty(customerModel.Phone) && customerModel.Phone != existingCustomer.Phone)
+            {
+                updateDefinitions.Add(Builders<CustomerModel>.Update.Set(c => c.Phone, customerModel.Phone));
+            }
+
+            if (!string.IsNullOrEmpty(customerModel.Address) && customerModel.Address != existingCustomer.Address)
+            {
+                updateDefinitions.Add(Builders<CustomerModel>.Update.Set(c => c.Address, customerModel.Address));
+            }
+
+            if (customerModel.IsVerified != existingCustomer.IsVerified)
+            {
+                updateDefinitions.Add(Builders<CustomerModel>.Update.Set(c => c.IsVerified, customerModel.IsVerified));
+            }
+
+            if (customerModel.IsDeactivated != existingCustomer.IsDeactivated)
+            {
+                updateDefinitions.Add(Builders<CustomerModel>.Update.Set(c => c.IsDeactivated, customerModel.IsDeactivated));
+            }
+
+            return updateDefinitions;
+        }
     }
 }

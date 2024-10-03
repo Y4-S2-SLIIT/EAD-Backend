@@ -24,16 +24,25 @@ namespace EADBackend.Controllers
         [ProducesResponseType(typeof(object), 200)]
         public IActionResult Login([FromBody] LoginModel loginModel)
         {
-            var customerId = _customerService.ValidateCustomer(loginModel.Username, loginModel.Password);
+            var customerid = _customerService.ValidateCustomer(loginModel.Username, loginModel.Password);
 
-            // Check if validation failed (customerId is null)
-            if (customerId == null)
+            if (customerid == null)
             {
                 return BadRequest(new { status = 400, error = "Invalid credentials." });
             }
-            var token = _jwtService.GenerateToken(customerId);
 
-            return Ok(new { status = 200, Token = token });
+            var customer = _customerService.GetCustomerById(customerid);
+
+            var token = _jwtService.GenerateToken(customer.Id);
+
+            // Assuming customer has properties IsVerified and IsDeactivated
+            return Ok(new
+            {
+                status = 200,
+                Token = token,
+                isVerified = customer.IsVerified,
+                isDeactivated = customer.IsDeactivated
+            });
         }
 
         // Secure Data
@@ -44,8 +53,6 @@ namespace EADBackend.Controllers
         {
             return Ok(new { status = "200", added = new { Data = "This is secure data only for authenticated users." } });
         }
-
-        // CRUD Operations for CustomerModel
 
         // Create a new customer
         [HttpPost("register")]
@@ -85,7 +92,7 @@ namespace EADBackend.Controllers
         // Get a customer by ID
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(CustomerModel), 200)]
-        [Authorize]
+        // [Authorize]
         public IActionResult GetCustomerById(string id)
         {
             var customer = _customerService.GetCustomerById(id);
@@ -97,7 +104,7 @@ namespace EADBackend.Controllers
             return Ok(customer);
         }
 
-        // Update a customer
+        // Update a customer, allowing for updating without changing the password
         [HttpPut("{id}")]
         [ProducesResponseType(typeof(string), 200)]
         [Authorize]
@@ -105,7 +112,7 @@ namespace EADBackend.Controllers
         {
             try
             {
-                _customerService.UpdateCustomer(id, customerModel);
+                _customerService.UpdateCustomerWithoutChangingPassword(customerModel);
                 return Ok(new { status = 200, added = new { Message = "Customer updated successfully." } });
             }
             catch (Exception ex)
@@ -143,9 +150,8 @@ namespace EADBackend.Controllers
                 return NotFound(new { status = 404, error = "Customer not found." });
             }
 
-
             customer.IsVerified = true;
-            _customerService.UpdateCustomer(id, customer);
+            _customerService.UpdateCustomerWithoutChangingPassword(customer);
             return Ok(new { status = 200, added = new { Message = "Customer verified successfully." } });
         }
 
@@ -162,7 +168,7 @@ namespace EADBackend.Controllers
             }
 
             customer.IsDeactivated = true;
-            _customerService.UpdateCustomer(id, customer);
+            _customerService.UpdateCustomerWithoutChangingPassword(customer);
             return Ok(new { status = 200, added = new { Message = "Customer deactivated successfully." } });
         }
 
@@ -179,9 +185,8 @@ namespace EADBackend.Controllers
             }
 
             customer.IsDeactivated = false;
-            _customerService.UpdateCustomer(id, customer);
+            _customerService.UpdateCustomerWithoutChangingPassword(customer);
             return Ok(new { status = 200, added = new { Message = "Customer activated successfully." } });
         }
     }
-
 }

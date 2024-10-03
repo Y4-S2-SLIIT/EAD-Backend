@@ -12,4 +12,5 @@ public interface ICustomerService
     void UpdateCustomer(string id, CustomerModel customerModel);
     void DeleteCustomer(string id);
     void VerifyCustomer(string id);
+    void UpdateCustomerWithoutChangingPassword(CustomerModel customerModel);
 }
