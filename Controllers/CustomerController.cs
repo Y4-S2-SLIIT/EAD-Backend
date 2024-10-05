@@ -33,7 +33,7 @@ namespace EADBackend.Controllers
             }
             var token = _jwtService.GenerateToken(customerId);
 
-            return Ok(new { status = 200, Token = token });
+            return Ok(new { status = 200, Token = token, CustomerId = customerId });
         }
 
         // Secure Data

@@ -1,3 +1,4 @@
+// IT21105302, Fernando U.S.L, CartModel
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System.Collections.Generic;
@@ -18,5 +19,11 @@ namespace EADBackend.Models
     {
         public required string ProductId { get; set; }
         public required int Quantity { get; set; }
+        public ProductModel? ProductDetails { get; set; }
+    }
+
+    public class UpdateQuantityModel
+    {
+        public int Quantity { get; set; }
     }
 }
