@@ -24,14 +24,14 @@ namespace EADBackend.Controllers
         [ProducesResponseType(typeof(object), 200)]
         public IActionResult Login([FromBody] LoginModel loginModel)
         {
-            var customerid = _customerService.ValidateCustomer(loginModel.Username, loginModel.Password);
+            var customerId = _customerService.ValidateCustomer(loginModel.Username, loginModel.Password);
 
-            if (customerid == null)
+            if (customerId == null)
             {
                 return BadRequest(new { status = 400, error = "Invalid credentials." });
             }
 
-            var customer = _customerService.GetCustomerById(customerid);
+            var customer = _customerService.GetCustomerById(customerId);
 
             var token = _jwtService.GenerateToken(customer.Id);
 
@@ -41,6 +41,7 @@ namespace EADBackend.Controllers
                 status = 200,
                 Token = token,
                 isVerified = customer.IsVerified,
+                CustomerId = customerId,
                 isDeactivated = customer.IsDeactivated
             });
         }

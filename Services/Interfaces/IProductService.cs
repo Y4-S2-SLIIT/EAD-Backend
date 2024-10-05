@@ -1,10 +1,11 @@
+// IT21105302, Fernando U.S.L, IProductService
 using EADBackend.Models;
 
 namespace EADBackend.Services.Interfaces;
 public interface IProductService
 {
     IEnumerable<ProductModel> GetAllProducts();
-    ProductModel GetProductById(string id);
+    ProductModel? GetProductById(string id);
     void CreateProduct(ProductModel productModel);
     void UpdateProduct(string id, ProductModel productModel);
     void DeleteProduct(string id);
