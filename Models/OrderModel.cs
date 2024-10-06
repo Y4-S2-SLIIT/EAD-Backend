@@ -14,32 +14,22 @@ namespace EADBackend.Models
         public required string CustomerId { get; set; }
         public double Total { get; set; }
         public required string DeliveryAddress { get; set; }
-        public DeliveryStatus DeliveryStatus { get; set; } = DeliveryStatus.Pending;
-        public List<VendorOrderItems> Items { get; set; } = [];
+        
+        // Change DeliveryStatus to string
+        public string DeliveryStatus { get; set; } = "Pending"; // Default status
+
+        public List<VendorOrderItems> Items { get; set; } = new();
         public string DeliveryDate { get; set; } = DateTime.Now.AddDays(7).ToString();
         public CancelDetails CancelDetails { get; set; } = new CancelDetails();
-    }
-
-    public enum DeliveryStatus
-    {
-        Pending,
-        Shipped,
-        Delivered,
-        Cancelled
-    }
-
-    public enum CancelStatus
-    {
-        Pending,
-        Canceled,
-        Rejected
     }
 
     public class CancelDetails
     {
         public bool Requested { get; set; } = false;
         public string Details { get; set; } = string.Empty;
-        public CancelStatus Status { get; set; } = CancelStatus.Pending;
+
+        // Change CancelStatus to string
+        public string Status { get; set; } = "Pending"; // Default status
     }
 
     public class VendorOrderItems

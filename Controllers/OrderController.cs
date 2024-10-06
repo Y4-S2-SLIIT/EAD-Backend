@@ -67,7 +67,7 @@ namespace EADBackend.Controllers
         public IActionResult UpdateOrder(string id, OrderModel orderModel)
         {
             _orderService.UpdateOrder(id, orderModel);
-            return Ok();
+            return Ok(orderModel);
         }
 
         // Delete order
@@ -77,6 +77,16 @@ namespace EADBackend.Controllers
         public IActionResult DeleteOrder(string id)
         {
             _orderService.DeleteOrder(id);
+            return Ok(new { Message = "Order deleted successfully." });
+        }
+
+        // update order status
+        [HttpPut("{id}/status")]
+        [Authorize]
+        [ProducesResponseType(typeof(string), 200)]
+        public IActionResult UpdateOrderStatus(string id, string status)
+        {
+            _orderService.UpdateOrderStatus(id, status);
             return Ok();
         }
     }
