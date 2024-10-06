@@ -152,6 +152,7 @@ namespace EADBackend.Controllers
             }
 
             customer.IsVerified = true;
+            customer.IsDeactivated = false;
             _customerService.UpdateCustomerWithoutChangingPassword(customer);
             return Ok(new { status = 200, added = new { Message = "Customer verified successfully." } });
         }
