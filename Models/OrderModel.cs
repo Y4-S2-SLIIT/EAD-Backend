@@ -56,5 +56,6 @@ namespace EADBackend.Models
         public string Id { get; set; } = ObjectId.GenerateNewId().ToString();
         public required string ProductId { get; set; }
         public required int Quantity { get; set; }
+        public ProductModel? ProductDetails { get; set; }
     }
 }
