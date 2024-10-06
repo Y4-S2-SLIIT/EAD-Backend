@@ -44,7 +44,7 @@ namespace EADBackend.Models
 
     public class VendorOrderItems
     {
-        public string VenderId { get; set; } = string.Empty;
+        public required string VenderId { get; set; }
         public bool IsAccepted { get; set; } = false;
         public List<OrderItemModel> OrderItems { get; set; } = new List<OrderItemModel>();
     }
