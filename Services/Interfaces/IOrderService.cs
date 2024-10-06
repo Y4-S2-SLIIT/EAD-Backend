@@ -11,4 +11,5 @@ public interface IOrderService
     void DeleteOrder(string id);
     IEnumerable<OrderModel> GetOrdersByVendorId(string vendorId);
     void UpdateOrderStatus(string id, string status);
+    void UpdateVendorOrderStatus(string orderId, string vendorId, string status);
 }

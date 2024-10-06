@@ -14,9 +14,8 @@ namespace EADBackend.Models
         public required string CustomerId { get; set; }
         public double Total { get; set; }
         public required string DeliveryAddress { get; set; }
-        
-        // Change DeliveryStatus to string
-        public string DeliveryStatus { get; set; } = "Pending"; // Default status
+    
+        public string DeliveryStatus { get; set; } = "Pending"; 
 
         public List<VendorOrderItems> Items { get; set; } = new();
         public string DeliveryDate { get; set; } = DateTime.Now.AddDays(7).ToString();
@@ -27,15 +26,13 @@ namespace EADBackend.Models
     {
         public bool Requested { get; set; } = false;
         public string Details { get; set; } = string.Empty;
-
-        // Change CancelStatus to string
-        public string Status { get; set; } = "Pending"; // Default status
+        public string Status { get; set; } = "Pending"; 
     }
 
     public class VendorOrderItems
     {
         public required string VenderId { get; set; }
-        public bool IsAccepted { get; set; } = false;
+        public string IsAccepted { get; set; }  = "Pending"; 
         public List<OrderItemModel> OrderItems { get; set; } = new List<OrderItemModel>();
     }
 

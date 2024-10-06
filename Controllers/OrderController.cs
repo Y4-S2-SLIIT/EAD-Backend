@@ -81,12 +81,22 @@ namespace EADBackend.Controllers
         }
 
         // update order status
-        [HttpPut("{id}/status")]
+        [HttpPut("{id}/{status}")]
         [Authorize]
         [ProducesResponseType(typeof(string), 200)]
         public IActionResult UpdateOrderStatus(string id, string status)
         {
             _orderService.UpdateOrderStatus(id, status);
+            return Ok();
+        }
+
+        // update vendor order status
+        [HttpPut("{orderId}/vendor/{vendorId}/{status}")]
+        [Authorize]
+        [ProducesResponseType(typeof(string), 200)]
+        public IActionResult UpdateVendorOrderStatus(string orderId, string vendorId, string status)
+        {
+            _orderService.UpdateVendorOrderStatus(orderId, vendorId, status);
             return Ok();
         }
     }

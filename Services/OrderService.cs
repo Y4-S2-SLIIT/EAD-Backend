@@ -85,6 +85,16 @@ namespace EADBackend.Services
             _orderCollection.ReplaceOne(filter, orderModel);
         }
 
+        public void UpdateVendorOrderStatus(string orderId, string vendorId, string status)
+        {
+            var filter = Builders<OrderModel>.Filter.Eq(o => o.Id, orderId) &
+                         Builders<OrderModel>.Filter.ElemMatch(o => o.Items,
+                             Builders<VendorOrderItems>.Filter.Eq(v => v.VenderId, vendorId));
+
+            var update = Builders<OrderModel>.Update.Set("Items.$.IsAccepted", status);
+            _orderCollection.UpdateOne(filter, update);
+        }
+
         public void UpdateOrderStatus(string id, string status)
         {
             // Validate the order ID
