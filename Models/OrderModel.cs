@@ -14,38 +14,25 @@ namespace EADBackend.Models
         public required string CustomerId { get; set; }
         public double Total { get; set; }
         public required string DeliveryAddress { get; set; }
-        public DeliveryStatus DeliveryStatus { get; set; } = DeliveryStatus.Pending;
-        public List<VendorOrderItems> Items { get; set; } = [];
+    
+        public string DeliveryStatus { get; set; } = "Pending"; 
+
+        public List<VendorOrderItems> Items { get; set; } = new();
         public string DeliveryDate { get; set; } = DateTime.Now.AddDays(7).ToString();
         public CancelDetails CancelDetails { get; set; } = new CancelDetails();
-    }
-
-    public enum DeliveryStatus
-    {
-        Pending,
-        Shipped,
-        Delivered,
-        Cancelled
-    }
-
-    public enum CancelStatus
-    {
-        Pending,
-        Canceled,
-        Rejected
     }
 
     public class CancelDetails
     {
         public bool Requested { get; set; } = false;
         public string Details { get; set; } = string.Empty;
-        public CancelStatus Status { get; set; } = CancelStatus.Pending;
+        public string Status { get; set; } = "Pending"; 
     }
 
     public class VendorOrderItems
     {
-        public string VenderId { get; set; } = string.Empty;
-        public bool IsAccepted { get; set; } = false;
+        public required string VenderId { get; set; }
+        public string IsAccepted { get; set; }  = "Pending"; 
         public List<OrderItemModel> OrderItems { get; set; } = new List<OrderItemModel>();
     }
 
@@ -56,5 +43,6 @@ namespace EADBackend.Models
         public string Id { get; set; } = ObjectId.GenerateNewId().ToString();
         public required string ProductId { get; set; }
         public required int Quantity { get; set; }
+        public ProductModel? ProductDetails { get; set; }
     }
 }
