@@ -10,12 +10,14 @@ namespace EADBackend.Services
     public class NotificationService : INotificationService
     {
         private readonly IMongoCollection<NotificationModel> _notificationCollection;
+        private readonly IProductService _productService; // Inject the product service
 
-        public NotificationService(IMongoClient client, IOptions<MongoDbSettings> settings)
+        public NotificationService(IMongoClient client, IOptions<MongoDbSettings> settings, IProductService productService)
         {
             var databaseName = settings.Value.DatabaseName;
             var database = client.GetDatabase(databaseName);
             _notificationCollection = database.GetCollection<NotificationModel>("Notifications");
+            _productService = productService; // Initialize the product service
         }
 
         public IEnumerable<NotificationModel> GetAllNotifications()
@@ -46,7 +48,22 @@ namespace EADBackend.Services
 
         public IEnumerable<NotificationModel> GetNotificationsByVendorId(string vendorId)
         {
-            return _notificationCollection.Find(notification => notification.VendorId == vendorId).ToList();
+            // Fetch notifications for the given vendorId
+            var notifications = _notificationCollection
+                .Find(notification => notification.VendorId == vendorId)
+                .ToList();
+
+            // Populate ProductDetails for each notification
+            foreach (var notification in notifications)
+            {
+                if (!string.IsNullOrEmpty(notification.ProductId))
+                {
+                    // Fetch product details using the ProductId
+                    notification.ProductDetails = _productService.GetProductById(notification.ProductId);
+                }
+            }
+
+            return notifications;
         }
     }
 }
