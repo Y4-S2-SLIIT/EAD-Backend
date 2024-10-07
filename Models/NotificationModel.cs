@@ -12,5 +12,6 @@ namespace EADBackend.Models
         public string Id { get; set; } = ObjectId.GenerateNewId().ToString();
         public required string VendorId { get; set; }
         public required string ProductId { get; set; }
+        public ProductModel? ProductDetails { get; set; }
     }
 }
