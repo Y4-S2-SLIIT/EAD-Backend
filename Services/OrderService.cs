@@ -44,7 +44,7 @@ namespace EADBackend.Services
                     }
                     else
                     {
-                        throw new InvalidOperationException("Insufficient stock for product: " + product.Name);
+                        throw new InvalidOperationException("Insufficient stock for product: " + product?.Name);
                     }
                 }
             }
